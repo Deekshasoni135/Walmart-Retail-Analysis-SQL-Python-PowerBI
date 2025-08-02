@@ -8,14 +8,14 @@ _An end-to-end data analysis solution uncovering revenue trends, customer behavi
 - [Business Problem](#business-problem)
 - [Dataset](#dataset)
 - [Tools and Technologies](#tools-and-technologies)
-- [Data Cleaning](#data-cleaning)
-- [Exploratory Data Analysis](#exploratory-data-analysis)
-- [Data Analysis](#data-analysis)
+- [Methods Used](#methods-used)
 - [Power BI Dashboard](#power-bi-dashboard)
-- [Results](#results)
+- [Requirements](#requirements)
 - [How to run this project](#how-to-run-this-project)
-- [Recommendations](#recommendations)
-- [References](#references)
+- [Project Structure](#project-structure)
+- [Results and Insights](#results-and-insights)
+- [Future Enhancements](#future-enhancements)
+- [Author and Contact](#author-and-contact)
 
 ## Overview
 This project is an end-to-end data analysis solution designed to extract critical business insights from Walmart sales data. We utilize Python for data processing and analysis, SQL for advanced querying, and structured problem-solving techniques to solve key business questions. 
@@ -75,11 +75,63 @@ pip install pandas numpy sqlalchemy mysql-connector-python
 
 ### 7. SQL Analysis: Complex Queries and Business Problem Solving
 - **Business Problem-Solving:** Write and execute complex SQL queries to answer critical business questions, such as:
-1. Revenue trends across branches and categories.
-2. Identifying best-selling product categories.
-3. Sales performance by time, city, and payment method.
-4. Analyzing peak sales periods and customer buying patterns.
-5. Profit margin analysis by branch and category.
+1. Calculate the total profit for each category.
+```sql
+SELECT 
+     Category,
+     SUM(unit_price * quantity * profit_margin) as Profit
+FROM walmart
+GROUP BY Category
+ORDER BY Profit DESC;
+```
+2. Calculate the total quantity of items sold per payment method.
+```sql
+SELECT
+     payment_method,
+     SUM(quantity) as no_qty_sold
+FROM walmart
+GROUP BY payment_method;
+```
+3. Determine the average, minimum, and maximum rating of categories for each city.
+```sql
+SELECT
+	  Category,
+      City,
+      AVG(rating) as Avg_rating,
+      MIN(rating) as Min_rating,
+      MAX(rating) as Max_rating
+FROM walmart
+GROUP BY city, category;
+```
+4. Determine the most common payment method for each branch
+```sql
+WITH CTE
+AS
+(SELECT 
+      Branch,
+      payment_method,
+      count(*) as total_trans,
+      RANK() OVER(PARTITION BY Branch ORDER BY COUNT(*) DESC) AS _Rank
+FROM walmart
+GROUP BY Branch, payment_method
+)
+SELECT * FROM CTE
+WHERE _Rank = 1;
+```
+5. Categorize sales into Morning, Afternoon, and Evening shifts
+```sql
+SELECT 
+      Branch,
+      CASE
+          WHEN HOUR(TIME(time))<12 THEN 'Morning'
+          WHEN HOUR(TIME(time)) BETWEEN 12 AND 17 THEN 'Afternoon'
+          ELSE 'Evening'
+	  END AS Shift,
+      COUNT(*) AS num_invoices
+FROM walmart
+GROUP BY Branch, Shift
+ORDER BY Branch, num_invoices DESC;
+```
 - **Documentation:** Keep clear notes of each query's objective, approach, and results.
 
 ### 8. Project Publishing and Documentation
@@ -90,9 +142,8 @@ pip install pandas numpy sqlalchemy mysql-connector-python
   - SQL query scripts.
   - Data files (if possible) or steps to access them.
 
-________________________________________
 
-## Dashboard
+## Power BI Dashboard
 
 The Power BI dashboard consists of:
 - **Sales Performance Overview**
@@ -107,7 +158,7 @@ The Power BI dashboard consists of:
 - **SQL Databases:** MySQL
 - **Python Libraries:**
   - ```pandas, numpy, sqlalchemy, mysql-connector-python```
-________________________________________
+
 
 ## How to Run This Project?
 ### 1. Clone the repository
@@ -127,7 +178,6 @@ python main.py
 
 ### 5. Launch Power BI and import the dataset for dashboard creation
 
-________________________________________
 
 ## Project Structure
 ```
@@ -144,13 +194,12 @@ Walmart-Retail-Analysis/
 ├── README.md
 └── requirements.txt               #List of required Python libraries.        
 ```
-________________________________________
+
 ## Results and Insights
 This section will include your analysis findings:
-•	Sales Insights: Key categories, branches with highest sales, and preferred payment methods.
-•	Profitability: Insights into the most profitable product categories and locations.
-•	Customer Behavior: Trends in ratings, payment preferences, and peak shopping hours.
-________________________________________
+- **Sales Insights:** Key categories, branches with highest sales, and preferred payment methods.
+- **Profitability:** Insights into the most profitable product categories and locations.
+- **Customer Behavior:** Trends in ratings, payment preferences, and peak shopping hours.
 
 ## Future Enhancements
 - Incorporate monthly or quarterly trend comparison
@@ -158,7 +207,7 @@ ________________________________________
 - Integrate live data feeds from transactional systems
 - Expand to multi-country datasets for global analysis
 
-## 👩‍💻 Author & Contact  
+## Author and Contact  
 **Deeksha Soni**  
   Data Analyst | SQL Enthusiast | Power BI Developer  
 📧 Email: your-email@example.com  

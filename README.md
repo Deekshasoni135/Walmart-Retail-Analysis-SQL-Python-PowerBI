@@ -30,8 +30,7 @@ Walmart wants to optimize store performance, better understand customer behavior
 
 ## Dataset
 - **Source:** Use the Walmart sales datasets from Kaggle.
-- **Dataset Link:** Walmart Sales Dataset
-- **Location:** Save the data in the data/ folder for easy reference and access
+- **Location:** Save the data in the ```data/``` folder for easy reference and access
 - **Content:** Branch, City, Date, Customer Type, Gender, Product Line, Unit Price, Quantity, Tax, Total, Payment, Rating
 
 ## Tools and Technologies
@@ -43,8 +42,7 @@ Walmart wants to optimize store performance, better understand customer behavior
 ## Methods Used
 ### 1. Download Walmart Sales Data
 - **Data Source:** Use the Walmart sales datasets from Kaggle.
-- **Dataset Link:** Walmart Sales Dataset
-- **Storage:** Save the data in the data/ folder for easy reference and access.
+- **Storage:** Save the data in the ```data/``` folder for easy reference and access.
   
 ### 2. Install Required Libraries and Load Data
 - **Libraries:** Install necessary Python libraries using:
@@ -210,8 +208,8 @@ This section will include your analysis findings:
 
 ## Author and Contact  
 **Deeksha Soni**  
-  Data Analyst | SQL Enthusiast | Power BI Developer  
-📧 Email: your-email@example.com  
+  Data Analyst   
+📧 Email: deeksha.soni13@gmail.com  
 🔗 LinkedIn: https://www.linkedin.com/in/itsdeekshasoni
 
 

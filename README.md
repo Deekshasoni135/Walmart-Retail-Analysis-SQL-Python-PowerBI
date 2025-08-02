@@ -29,16 +29,16 @@ Walmart wants to optimize store performance, better understand customer behavior
 - Branch and product profitability insights
 
 ## Dataset
-- Source: Use the Walmart sales datasets from Kaggle.
-- Dataset Link: Walmart Sales Dataset
-- Location: Save the data in the data/ folder for easy reference and access
-- Content: Branch, City, Date, Customer Type, Gender, Product Line, Unit Price, Quantity, Tax, Total, Payment, Rating
+- **Source:** Use the Walmart sales datasets from Kaggle.
+- **Dataset Link:** Walmart Sales Dataset
+- **Location:** Save the data in the data/ folder for easy reference and access
+- **Content:** Branch, City, Date, Customer Type, Gender, Product Line, Unit Price, Quantity, Tax, Total, Payment, Rating
 
 ## Tools and Technologies
-- Programming: Python (Pandas, NumPy)
-- Database: MySQL
-- Visualization: Power BI
-- Other: SQLAlchemy, MySQL-Connector-Python
+- **Programming:** Python (Pandas, NumPy)
+- **Database:** MySQL
+- **Visualization:** Power BI
+- **Other:** SQLAlchemy, MySQL-Connector-Python
 
 ## Methods Used
 ### 1. Download Walmart Sales Data
@@ -75,7 +75,7 @@ pip install pandas numpy sqlalchemy mysql-connector-python
 
 ### 7. SQL Analysis: Complex Queries and Business Problem Solving
 - **Business Problem-Solving:** Write and execute complex SQL queries to answer critical business questions, such as:
-1. Calculate the total profit for each category.
+#### 1. Calculate the total profit for each category.
 ```sql
 SELECT 
      Category,
@@ -84,7 +84,7 @@ FROM walmart
 GROUP BY Category
 ORDER BY Profit DESC;
 ```
-2. Calculate the total quantity of items sold per payment method.
+**2. Calculate the total quantity of items sold per payment method.**
 ```sql
 SELECT
      payment_method,
@@ -92,7 +92,7 @@ SELECT
 FROM walmart
 GROUP BY payment_method;
 ```
-3. Determine the average, minimum, and maximum rating of categories for each city.
+**3. Determine the average, minimum, and maximum rating of categories for each city.**
 ```sql
 SELECT
 	  Category,
@@ -103,7 +103,7 @@ SELECT
 FROM walmart
 GROUP BY city, category;
 ```
-4. Determine the most common payment method for each branch
+**4. Determine the most common payment method for each branch**
 ```sql
 WITH CTE
 AS
@@ -118,7 +118,7 @@ GROUP BY Branch, payment_method
 SELECT * FROM CTE
 WHERE _Rank = 1;
 ```
-5. Categorize sales into Morning, Afternoon, and Evening shifts
+**5. Categorize sales into Morning, Afternoon, and Evening shifts**
 ```sql
 SELECT 
       Branch,
@@ -146,9 +146,10 @@ ORDER BY Branch, num_invoices DESC;
 ## Power BI Dashboard
 
 The Power BI dashboard consists of:
-- **Sales Performance Overview**
-- **Customer Behavior**
-- **Product Analysis**
+- **What is the revenue distribution across different product categories?**
+- **Which time slot (Morning, Afternoon, Evening) sees the highest product quantity sold?**
+- **Which branches are top performers in terms of total revenue?**
+- **How has revenue trended over the years from 2019 to 2023?**
   
   <img width="1327" height="746" alt="Screenshot 2025-07-31 231201" src="https://github.com/user-attachments/assets/f534a394-ff76-413c-852b-aaa2a362218d" />
 
